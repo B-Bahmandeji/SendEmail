@@ -1,0 +1,28 @@
+Create a new Class Library project in Asp.Net Core.Your main app, uses this dll to send email.
+Install NETCore.MailKit by NuGet.
+
+To send emails, we need a server, like Gmail SMTP server.
+Gmail allows you to send 2,000 emails per day using the Gmail SMTP Server for FREE.
+What you need from Gmail: Your Gmail ID (for safety use MAIL-ID not your personal one) + Password + SMTP Server address + Port = 465(SSL) or 587(TLS).
+You login with your personal authentications and get an app apssword to use in your app.
+How to get MAIL-ID of app password from Google:
+  Google no longer supports the use of third-party apps or devices to ask for username and password.
+  Instead we should use App Password.
+  you can get information on how to get App Password from: https://support.google.com/accounts/answer/185833
+  Use https://myaccount.google.com/security to start and get your password.
+  Use this generated password in appsettings.json file of your main app project, instead of your personal password. 
+
+Create a model class (EmailConfiguration) to have From email, Smtp Server info, Smtp Port number, UserName and Password
+Create a new class (Message : MimeMessage). It has some constructor to create the message with Subject, Content, and a list of To emails.
+Then create an interface (IEmailSender) with two methods SendEmail and SendEmailHtml.
+Create a class (EmailSender : IEmailSender) with Dependency Injected EmailConfiguration and methods to Create and Send email messages.
+
+How to use this dll?  
+  Create your Main app .
+  Install NETCore.MailKit via NuGet to your new project.
+  Add EmailSender (class library ) as a project to your new project or just dll file as a assembly in Dependencies
+  Add info of smtp server to appsettings.json of your main project
+  In your main project controller (ex: AccountController) inject IEmailSender
+  Add a new method (sendEmail()) to this controller to fill info and call SendEmailHtml of the dll.
+
+Now you are ready to test and send email by your gmail account.
