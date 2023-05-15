@@ -1,5 +1,4 @@
-﻿//https://code-maze.com/aspnetcore-send-email/
-
+﻿
 
 using ComeToNet_MVC01.Models;
 using MailKit.Net.Smtp;
